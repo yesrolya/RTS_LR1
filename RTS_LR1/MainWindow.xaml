@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RTS_LR1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="400" Width="800" Background="#FFFFFF" ResizeMode="NoResize" FontSize="14">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel VerticalAlignment="Center"  Grid.Column="0" Grid.Row="0"  Orientation="Vertical">
+            <Image Margin="10" Name ="Img0" />
+            <Label Name ="Label10">
+                <Label.Content>
+                    <StackPanel>
+                        <TextBlock Margin="10" TextWrapping="Wrap">Изображение выше исчезает на 1 секунду и появляется на 1 секунду</TextBlock>
+                    </StackPanel>
+                </Label.Content>
+            </Label>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center">
+            <Image Margin="10" Name ="Img2" />
+            <Label>
+                <Label.Content>
+                    <StackPanel>
+                        <TextBlock Margin="10" TextWrapping="Wrap">Изображение выше плавно меняет размер в течении 2 секунд</TextBlock>
+                    </StackPanel>
+                </Label.Content>
+            </Label>
+        </StackPanel>
+
+        <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label.Content>
+                <StackPanel>
+                    <TextBlock Margin="10,0,10,10" TextWrapping="Wrap">Дата и время запуска:</TextBlock>
+                    <TextBlock Margin="10,0,10,10" Name="NowDateTime"  TextWrapping="Wrap"/>
+                    <TextBlock Margin="10,0,10,10" TextWrapping="Wrap">Время, прошедшее с запуска программы:</TextBlock>
+                    <TextBlock Margin="10,0,10,10"  Name="StartTime" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock Margin="10,0,10,10" TextWrapping="Wrap">До защиты диплома осталось:</TextBlock>
+                    <TextBlock Margin="10,0,10,0" Name="DiplomTime" TextWrapping="Wrap"></TextBlock>
+                </StackPanel>
+            </Label.Content>
+        </Label>
     </Grid>
 </Window>
