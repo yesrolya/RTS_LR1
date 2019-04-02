@@ -10,13 +10,14 @@ namespace RTS_LR1
 {
     public partial class MainWindow : Window
     {
-        DateTime currentTime;
-        TimeSpan ts;
+        System.DateTime currentTime;
+        System.TimeSpan ts;
         DateTime date_diplom;
         TimeSpan start_programm;
         private System.Timers.Timer aTimer;
         private System.Windows.Threading.DispatcherTimer bTimer;
         private System.Windows.Forms.Timer cTimer;
+        //private System.Diagnostics.Stopwatch sw;
         bool visibleImg0 = true;
         int h, w;
         void Initialize()
@@ -46,6 +47,9 @@ namespace RTS_LR1
         
         private void Set_aTimer()
         {
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+
             //таймер этого типа не может работать с GUI выводится в консоли
             aTimer = new System.Timers.Timer()
             {
@@ -56,6 +60,8 @@ namespace RTS_LR1
             aTimer.Elapsed += new ElapsedEventHandler(
             delegate (Object source, System.Timers.ElapsedEventArgs e) 
             {
+                sw.Stop();
+                Console.WriteLine(@"{0,-45}: {1, 12}", "System.Timers.Timer: ", sw.Elapsed.ToString());
                 currentTime = currentTime.AddSeconds(1);
                 TimeSpan temp = (date_diplom - currentTime);
                 Console.WriteLine(temp);
@@ -64,11 +70,16 @@ namespace RTS_LR1
 
         private void Set_bTimer()
         {
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
             //таймер WPF
             ts = new TimeSpan(0, 0, 1);
             bTimer = new System.Windows.Threading.DispatcherTimer();
             bTimer.Tick += (sender, e) =>
             {
+                sw.Stop();
+                Console.WriteLine(@"{0,-45}: {1, 12}", "System.Windows.Threading.DispatcherTimer: ", sw.Elapsed.ToString());
+
                 if (visibleImg0)
                     Img0.Visibility = Visibility.Hidden;
                 else
@@ -83,10 +94,14 @@ namespace RTS_LR1
         
         private void Set_cTimer()
         {
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
             //таймер WindowsForms
             cTimer = new System.Windows.Forms.Timer();
             cTimer.Tick += (sender, e) =>
             {
+                sw.Stop();
+                Console.WriteLine(@"{0,-45}: {1, 12}", "System.Windows.Forms.Timer:", sw.Elapsed.ToString());
                 TimeSpan temp = (date_diplom - currentTime);
                 DiplomTime.Text = temp.ToString();
             };
@@ -114,6 +129,7 @@ namespace RTS_LR1
             };
             Img2.BeginAnimation(Image.HeightProperty, img2AnimateHeight);
             Img2.BeginAnimation(Image.WidthProperty, img2AnimateWidth);
+            
         }
 
         public struct SystemTime
@@ -154,6 +170,7 @@ namespace RTS_LR1
 
             Initialize();
             StartMyTimer();
+
         }
     }
 }
